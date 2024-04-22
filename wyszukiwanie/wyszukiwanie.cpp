@@ -1,16 +1,36 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <algorithm>
 using namespace std;
 void losowa_tablica(int *tab, int nm_zakres, int nw_zakres, int r) {
     srand(time(NULL));
-    for (int i = 0; i < r; i++) {
-
-        tab[i] = (rand() % (nw_zakres - nm_zakres + 1)) + nm_zakres;
-
+       if (r > nw_zakres - nm_zakres + 1) {
+        cout << "Za ma³y zakres do wygenerowania tablicy bez powtórzeñ." << endl;
+        return;
     }
-    cout << "wylosowana tablica:";
-    for (int i = 0; i < r; i++) {
+
+
+    int dostepne_liczby[nw_zakres - nm_zakres + 1];
+    for (int i = 0; i < nw_zakres - nm_zakres + 1; ++i) {
+        dostepne_liczby[i] = nm_zakres + i;
+    }
+
+
+    for (int i = 0; i < r; ++i) {
+
+        int indeks = rand() % (nw_zakres - nm_zakres + 1 - i);
+
+        tab[i] = dostepne_liczby[indeks];
+
+        for (int j = indeks; j < nw_zakres - nm_zakres - i; ++j) {
+            dostepne_liczby[j] = dostepne_liczby[j + 1];
+        }
+    }
+
+
+    cout << "Wylosowana tablica bez powtorzen:";
+    for (int i = 0; i < r; ++i) {
         cout << tab[i] << " ";
     }
 }
@@ -32,8 +52,13 @@ void wyszukiwnie_liniowe(int *tab, int r, int szukana) {
 void wyszukiwnie_binarne(int *tab, int r, int szukana) {
     int l = 0;
     int p = r - 1;
+    sort(tab, tab + r);
+    cout<<"\nposortowana tablica:";
+    for(int i = 0;i<r;i++){
+        cout<<tab[i]<<" ";
+    }
     while (l <= p) {
-        int s = (l + p) / 2;
+        int s = l + (p - l) / 2;
         if (tab[s] == szukana) {
             cout << "\n (wysz._binarne)liczba szukana jest na indeksie: " << s;
             return;
