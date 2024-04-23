@@ -84,7 +84,8 @@ int main()
 	srand((unsigned)time(NULL));
 	start = atime();
     wyszukiwnie_binarne(tab,rozmiar,szukana);
-    end += (atime() - start)/1000;
+    //liczenie czasu w sekundach
+    end += (atime() - start)/1000000;
 
 	cout<<"\nczas sortowania: "<<end<<endl;
 
