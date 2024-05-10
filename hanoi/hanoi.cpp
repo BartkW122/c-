@@ -3,7 +3,7 @@
 using namespace std;
 void hanoi(int rollerCount,int sticksCount){
         int moveCount =pow(2,rollerCount) - 1;
-        int arrRoller[sticksCount] = {0};
+        int arrRoller[sticksCount];
 
         for (int j = 1; j <= moveCount; j++) {
             int r = 0;
