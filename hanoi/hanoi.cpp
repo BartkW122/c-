@@ -2,6 +2,12 @@
 #include <vector>
 #include <ctime>
 using namespace std;
+<<<<<<< HEAD
+=======
+void hanoi(int rollerCount,int sticksCount){
+        int moveCount =pow(2,rollerCount) - 1;
+        int arrRoller[sticksCount];
+>>>>>>> 665f6c02b81c33e4fab107ccc7cedda6be149cdd
 
 extern __inline__ unsigned long long int atime()
 
